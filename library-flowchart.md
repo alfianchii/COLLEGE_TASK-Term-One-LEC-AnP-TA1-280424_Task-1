@@ -1,15 +1,14 @@
 ```mermaid
 flowchart TD
     A@{ shape: circle, label: "Mulai" } --> B[Inisialisasi Struct Perpustakaan]
-    B --> C{Input: Judul, Tahun Terbit, Jenis Media}
 
     subgraph "Input Data"
-        C --> C1@{ shape: sl-rect, label: "Input Judul" }
-        C --> C2@{ shape: sl-rect, label: "Input Tahun Terbit" }
-        C --> C3@{ shape: sl-rect, label: "Input Jenis Media" }
+        B --> C1@{ shape: sl-rect, label: "Input Judul" }
+        B --> C2@{ shape: sl-rect, label: "Input Tahun Terbit" }
+        B --> C3@{ shape: sl-rect, label: "Input Jenis Media" }
     end
 
-    C --> D{Jenis Media?}
+    C3 --> D{Jenis Media?}
     D -->|Buku| E[Set Union ke Buku]
     D -->|Majalah| F[Set Union ke Majalah]
 
