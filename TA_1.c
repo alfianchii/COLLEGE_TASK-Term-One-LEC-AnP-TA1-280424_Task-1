@@ -1,24 +1,22 @@
 #include <stdio.h>
 #include <string.h>
 
+// Inisialisasi Struct & Union
+typedef union {
+    char buku[50];
+    char majalah[50];
+} JenisMedia;
+
+typedef struct {
+    char judul[100];
+    int tahunTerbit;
+    JenisMedia media;
+    int tipeMedia;
+} Perpustakaan;
+
 int main()
 {
-    // Inisialisasi Struct & Union
-    union media
-    {
-        char buku[30];
-        char majalah[30];
-    };
-
-    struct pustaka
-    {
-        char judul[100];
-        int tahun;
-        int tipe;
-        union media jenis;
-    };
-    
-    struct pustaka item;
+    Perpustakaan item;
 
     // Start Page
     printf ("********************************\n");
@@ -32,16 +30,16 @@ int main()
     printf ("Judul Item       : ");
     scanf ("%[^\n]", item.judul);
     printf ("Tahun Terbit     : ");
-    scanf ("%d", &item.tahun);
+    scanf ("%d", &item.tahunTerbit);
     printf ("\nJenis Item \n< 1 > Buku\n< 2 > Majalah\nPilih Jenis Item : ");
-    scanf ("%d", &item.tipe);
+    scanf ("%d", &item.tipeMedia);
     
     // Set Union
-    switch (item.tipe)
+    switch (item.tipeMedia)
     {
-        case 1 : strcpy (item.jenis.buku, "Buku");
+        case 1 : strcpy (item.media.buku, "Buku");
         break;
-        case 2 : strcpy (item.jenis.majalah, "Majalah");
+        case 2 : strcpy (item.media.majalah, "Majalah");
         break;
     }
 
@@ -53,12 +51,12 @@ int main()
     printf ("\n\n>> Informasi Item <<\n");
     printf ("--------------------\n\n");
     printf ("Judul Item   : %s\n", item.judul);
-    printf ("Tahun Terbit : %d\n", item.tahun);
-    switch (item.tipe)
+    printf ("Tahun Terbit : %d\n", item.tahunTerbit);
+    switch (item.tipeMedia)
     {
-        case 1 : printf ("Jenis Item   : %s\n\n", item.jenis.buku);
+        case 1 : printf ("Jenis Item   : %s\n\n", item.media.buku);
         break;
-        case 2 : printf ("Jenis Item   : %s\n\n", item.jenis.majalah);
+        case 2 : printf ("Jenis Item   : %s\n\n", item.media.majalah);
         break;
         default : printf ("Jenis Item   : Maaf, pilihan anda tidak tersedia.\n\n");
     }
