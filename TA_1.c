@@ -2,22 +2,27 @@
 #include <string.h>
 
 // Inisialisasi Struct & Union
-typedef union {
-    char buku[50];
-    char majalah[50];
-} JenisMedia;
+union media
+{
+    char buku[30];
+    char majalah[30];
+};
 
-typedef struct {
+struct pustaka
+{
     char judul[100];
-    int tahunTerbit;
-    JenisMedia media;
-    int tipeMedia;
-} Perpustakaan;
+    int tahun;
+    union media jenis;
+} item;
+
+void InputData (struct pustaka *item);
+
+void OutputData (struct pustaka *item);
 
 int main()
 {
-    Perpustakaan item;
-
+    int tipe;
+    
     // Start Page
     printf ("********************************\n");
     printf ("|       SISTEM INFORMASI       |\n");
@@ -25,43 +30,54 @@ int main()
     printf ("********************************\n\n");
 
     // Input Data
-    printf ("\n* Masukkan Informasi Item *\n");
-    printf ("---------------------------\n\n");
-    printf ("Judul Item       : ");
-    scanf ("%[^\n]", item.judul);
-    printf ("Tahun Terbit     : ");
-    scanf ("%d", &item.tahunTerbit);
-    printf ("\nJenis Item \n< 1 > Buku\n< 2 > Majalah\nPilih Jenis Item : ");
-    scanf ("%d", &item.tipeMedia);
-    
-    // Set Union
-    switch (item.tipeMedia)
-    {
-        case 1 : strcpy (item.media.buku, "Buku");
-        break;
-        case 2 : strcpy (item.media.majalah, "Majalah");
-        break;
-    }
+    InputData (&item);
 
     getchar ();
     printf ("\nInformasi item sudah tersimpan. Tekan ENTER untuk menampilkan hasil . . .");
     getchar ();
 
     // Output Data
-    printf ("\n\n>> Informasi Item <<\n");
-    printf ("--------------------\n\n");
-    printf ("Judul Item   : %s\n", item.judul);
-    printf ("Tahun Terbit : %d\n", item.tahunTerbit);
-    switch (item.tipeMedia)
-    {
-        case 1 : printf ("Jenis Item   : %s\n\n", item.media.buku);
-        break;
-        case 2 : printf ("Jenis Item   : %s\n\n", item.media.majalah);
-        break;
-        default : printf ("Jenis Item   : Maaf, pilihan anda tidak tersedia.\n\n");
-    }
-    
+    OutputData (&item);    
     printf ("TERIMA KASIH\n");
     
     return 0;
+}
+
+void InputData (struct pustaka *item)
+{
+    int tipe;
+
+    // Input Data
+    printf ("\n* Masukkan Informasi Item *\n");
+    printf ("---------------------------\n\n");
+    printf ("Judul Item       : ");
+    scanf (" %[^\n]", item->judul);
+    printf ("Tahun Terbit     : ");
+    scanf ("%d", &item->tahun);
+    printf ("\nJenis Item \n< 1 > Buku\n< 2 > Majalah\nPilih Jenis Item : ");
+    scanf ("%d", &tipe);
+    
+    // Set Union
+    if (tipe == 1)
+    {
+        strcpy (item->jenis.buku, "Buku");
+    }
+    else if (tipe == 2)
+        {
+            strcpy (item->jenis.majalah, "Majalah");
+        }
+        else
+        {
+            strcpy (item->jenis.buku, "Maaf, pilihan anda tidak tersedia.");
+        }
+}
+
+void OutputData (struct pustaka *item)
+{
+    // Output Data
+    printf ("\n\n>> Informasi Item <<\n");
+    printf ("--------------------\n\n");
+    printf ("Judul Item   : %s\n", item->judul);
+    printf ("Tahun Terbit : %d\n", item->tahun);
+    printf ("Jenis Item   : %s\n\n", item->jenis.buku);
 }
