@@ -1,6 +1,6 @@
-Program yang diberikan akan mencetak urutan angka [12, 25, 34, 64, 22] jika dijalankan. Dari hasil ini, kita bisa melihat bahwa deretan angka sudah terurut, kecuali pada elemen terakhir. Jika array kita ubah menjadi lebih deret sederhana yang sudah terurut seperti [1, 2, 3], program justru merusak urutan menjadi [1, 3, 2].
+Program yang diberikan akan mencetak urutan angka [12, 25, 34, 64, 22] jika dijalankan. Dari hasil ini, kita bisa melihat bahwa deretan angka sudah terurut, kecuali pada elemen terakhir. Jika array kita ubah menjadi deret lebih sederhana yang sudah terurut seperti [1, 2, 3], program justru merusak urutan menjadi [1, 3, 2].
 
-Saat array memasuki function sort, akan dimulai perulangan dengan range index i = [0, n-1]. Dalam setiap iterasi, ada proses perulangan lagi dengan range index j = [0, n]. Setiap iterasi j, akan terjadi perubahan nilai pada index i dan j jika nilai pada index j lebih besar daripada i.
+Saat array memasuki function sort, akan dimulai perulangan dengan range index i = [0, n-1]. Dalam setiap iterasi, ada proses perulangan lagi dengan range index j = [0, n]. Setiap iterasi j, akan terjadi pertukaran nilai pada index i dan j jika nilai pada index j lebih besar daripada i.
 
 Kurang lebih berikut tahap-tahap yang terjadi pada program sort:
 
@@ -91,7 +91,7 @@ void sort(int arr[], int n) {
 }
 int main() {
   srand(time(NULL));
-  int arr[4];
+  int arr[20];
   int n = sizeof(arr) / sizeof(arr[0]);
   for (int i = 0; i < n; i++) {
     arr[i] = rand() % 100;
